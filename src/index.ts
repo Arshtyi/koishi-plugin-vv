@@ -15,7 +15,7 @@ export const Config: Schema<Config> = Schema.object({
         .default("https://api.zvv.quest")
         .description("API地址"),
     defaultImageCount: Schema.number()
-        .default(5)
+        .default(10)
         .min(1)
         .max(20)
         .description("默认图片数量"),
@@ -50,10 +50,21 @@ export function apply(ctx: Context, config: Config) {
                     response.data.data?.length > 0
                 ) {
                     const images = response.data.data;
-                    // 创建一个图像消息数组
-                    const elements = images.map((url) => h.image(url));
-                    // 返回复合消息
-                    return h("message", elements);
+
+                    // 创建转发消息的元素数组
+                    const messages = [];
+
+                    // 添加文字说明消息
+                    const infoMessage = `关键词：${text}\n数量：${images.length}\nAPI：${config.apiBaseUrl}`;
+                    messages.push(h("message", infoMessage));
+
+                    // 添加图片消息
+                    images.forEach((url) => {
+                        messages.push(h("message", h.image(url)));
+                    });
+
+                    // 返回转发消息
+                    return h("message", { forward: true }, messages);
                 } else {
                     return `没有找到与"${text}"相关的梗图`;
                 }

@@ -1,7 +1,7 @@
-dist/
-lib/
+/dist
+/lib
 tsconfig.tsbuildinfo
-node_modules/
+/node_modules
 *.tgz
 package-lock.json
-script/
+/script

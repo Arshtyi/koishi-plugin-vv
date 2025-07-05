@@ -1,7 +1,7 @@
 {
     "name": "koishi-plugin-vv",
     "description": "输出VV梗图",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
     "files": [
@@ -20,13 +20,14 @@
     "scripts": {
         "build": "tsc -b && koishi-console build",
         "compile": "tsc -b && koishi-console build && npm pack",
-        "pub": "npm publish"
+        "pub": "npm run publish"
     },
     "keywords": [
         "chatbot",
         "koishi",
         "plugin",
         "vv",
+        "zvv",
         "meme"
     ],
     "koishi": {
